@@ -1,5 +1,6 @@
 import axios from "axios";
-import type { Session, User } from "$lib/types/poi-types";
+import type { places, Session, User } from "$lib/types/poi-types";
+
 
 
 export const apiService = {
@@ -36,6 +37,17 @@ export const apiService = {
     } catch (error) {
       console.log(error);
       return null;
+    }
+  },
+
+  async getPlaces(token: string, loggedInUser: Session): Promise<places[]> {
+    try {
+      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+      const response = await axios.get(this.baseUrl + "/api/categories/" + loggedInUser._id + "/pois");
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return [];
     }
   }
 };

@@ -10,5 +10,22 @@ export interface User {
   email: string;
   password: string;
   _id?: string;
+  type: string;
+}
+export interface categories {
+    title: string;
+    user: User | string;
+    image: string;
+    _id?: string;
 }
 
+export interface places {
+    name: string;
+    description: string;
+    location: string;
+    latitude: number;
+    longitude: number;
+    category: categories | string;
+    image: string,
+    id?: string;
+}
