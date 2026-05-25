@@ -11,5 +11,5 @@
 </script>
 
 <Card title="Places">
-  <PlaceList />
+  <PlaceList token={data.session.token}/>
 </Card>

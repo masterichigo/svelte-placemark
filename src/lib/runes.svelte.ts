@@ -11,3 +11,22 @@ export const currentPlaces= $state({
  places: []
 });
 
+export const currentDataSets = $state({
+  reviewsByUser: {
+    labels: [],
+    datasets: [
+      {
+        values: [0, 0]
+      }
+    ]
+  },
+  ratingsByCategory: {
+    labels: [],
+    datasets: [
+      {
+        values: [0, 0]
+      }
+    ]
+  }
+});
+

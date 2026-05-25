@@ -10,7 +10,7 @@ export interface User {
   email: string;
   password: string;
   _id?: string;
-  type: string;
+  type?: string;
 }
 export interface categories {
     title: string;
