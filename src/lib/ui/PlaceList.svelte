@@ -1,5 +1,6 @@
 <script lang="ts">
   import { currentPlaces } from "$lib/runes.svelte";
+  console.log("Current places in PlaceList:", currentPlaces.places);
 </script>
 
 <table class="table is-fullwidth">
@@ -8,7 +9,8 @@
       <th>Place Name</th>
       <th>Category</th>
       <th>Location</th>
-      <th>Coordinates</th>
+      <th>Longitude</th>
+      <th>Latitude</th>
     </tr>
   </thead>
   <tbody>
@@ -18,12 +20,15 @@
           {place.name}
         </td>
         <td>
-          {place.category.title}
+          {place.categoryName}
         </td><td>
           {place.location}
         </td>
         <td>
-          {place.latitude}, {place.longitude}
+          {place.longitude}
+        </td>
+        <td>
+          {place.latitude}
         </td>
       </tr>
     {/each}

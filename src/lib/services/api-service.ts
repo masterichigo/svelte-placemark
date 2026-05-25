@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { places, Session, User } from "$lib/types/poi-types";
+import { currentPlaces, loggedInUser } from "$lib/runes.svelte";
 
 
 
@@ -17,8 +18,17 @@ export const apiService = {
     }
   },
 
+  saveSession(session: Session, email: string) {
+    loggedInUser.email = email;
+    loggedInUser.name = session.name;
+    loggedInUser.token = session.token;
+    loggedInUser._id = session._id;
+    localStorage.donation = JSON.stringify(loggedInUser);
+  },
+
   async login(email: string, password: string): Promise<Session | null> {
     try {
+      delete axios.defaults.headers.common["Authorization"];
       const response = await axios.post(`${this.baseUrl}/api/users/authenticate`, {
         email,
         password
@@ -31,7 +41,7 @@ export const apiService = {
           token: response.data.token,
           _id: response.data._id
         };
-        return session;
+       return session;
       }
       return null;
     } catch (error) {
@@ -40,14 +50,15 @@ export const apiService = {
     }
   },
 
-  async getPlaces(token: string, loggedInUser: Session): Promise<places[]> {
+async getPlaces(token: string, id: string): Promise<any> {
     try {
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-      const response = await axios.get(this.baseUrl + "/api/categories/" + loggedInUser._id + "/pois");
+      const response = await axios.get(this.baseUrl + "/api/categories/" + id + "/pois");
       return response.data;
     } catch (error) {
       console.log(error);
       return [];
     }
-  }
+  },
+
 };

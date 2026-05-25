@@ -8,6 +8,6 @@ export const loggedInUser = $state({
   _id: ""
 });
 export const currentPlaces= $state({
- places: [] as places[],
+ places: []
 });
 
