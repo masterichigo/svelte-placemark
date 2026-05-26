@@ -1,3 +1,3 @@
 export const load = async ({ cookies }) => {
-  cookies.delete("donation-user", { path: "/" });
+  cookies.delete("place-user", { path: "/" });
 };

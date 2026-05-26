@@ -2,9 +2,10 @@
   import { currentPlaces } from "$lib/runes.svelte";
   import { apiService } from "$lib/services/api-service";
   import { refreshPlaceState } from "$lib/services/utils";
+ 
 
   // Accept auth token passed down from the parent view layout context
-  let { token } = $props();
+  let { token, _id } = $props();
   let errorMessage = $state("");
 
   async function handleReviewSubmit(event) {
@@ -46,6 +47,9 @@
       } else {
         errorMessage = "Failed to delete place image. Check network or server validations.";
       }
+      
+      const current = await apiService.getPlaces(token, _id);
+      refreshPlaceState(current);
     } catch (err) {
       errorMessage = err.message || "An unexpected error occurred.";
     }
@@ -58,7 +62,7 @@
     {errorMessage}
   </div>
 {/if}
-
+{@debug token, _id}
 <table class="table is-fullwidth is-striped is-hoverable">
   <thead>
     <tr>

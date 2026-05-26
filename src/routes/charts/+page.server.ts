@@ -9,7 +9,7 @@ export const load: PageServerLoad = async ({ cookies }) => {
     return {
       users: await apiService.getUsers(session.token),
       categories: await apiService.getCategories(session.token),
-      places: await apiService.getPlaces(session.token, session._id)
+      places: await apiService.getAllPlaces(session.token)
     };
   }
 };
